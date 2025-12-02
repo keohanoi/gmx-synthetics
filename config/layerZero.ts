@@ -22,6 +22,10 @@ export default async function (hre: HardhatRuntimeEnvironment): Promise<LayerZer
     arbitrumSepolia: {
       endpoint: "0x6EDCE65403992e310A62460808c4b910D972f10f",
     },
+    mantleSepolia: {
+      // TODO: Add Mantle Sepolia LayerZero endpoint if needed for cross-chain testing
+      // endpoint: "0x...",
+    },
   };
 
   const layerZeroEndpointConfig: LayerZeroEndpointConfig = config[hre.network.name];

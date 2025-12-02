@@ -103,6 +103,20 @@ export default async function (hre: HardhatRuntimeEnvironment): Promise<OracleCo
       edgeOracleSigner: "0x1C498E2FE362e489A5Aac71690f9121914e0d55e",
     },
 
+    mantleSepolia: {
+      signers: [], // Will be populated with deployer address during deployment
+      maxOraclePriceAge,
+      maxAtomicOraclePriceAge,
+      maxOracleTimestampRange,
+      maxRefPriceDeviationFactor: decimalToFloat(5, 1), // 50%
+      minOracleBlockConfirmations: 255,
+      minOracleSigners: 1,
+      // Note: Chainlink Data Streams may not be available on Mantle Sepolia testnet
+      // dataStreamFeedVerifier: "0x...", // TODO: Add if available
+      // chainlinkPaymentToken: "0x...", // TODO: Add if available
+      edgeOracleSigner: "0x1C498E2FE362e489A5Aac71690f9121914e0d55e",
+    },
+
     arbitrumGoerli: {
       signers: ["0xFb11f15f206bdA02c224EDC744b0E50E46137046", "0x23247a1A80D01b9482E9d734d2EB780a3b5c8E6c"],
       maxOraclePriceAge,
