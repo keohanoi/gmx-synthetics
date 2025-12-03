@@ -1,0 +1,531 @@
+{
+  "address": "0xF01c7D728EE24d76B866127Bb80e189fb26aB367",
+  "abi": [
+    {
+      "type": "constructor",
+      "payable": false,
+      "inputs": [
+        {
+          "type": "address",
+          "name": "_roleStore"
+        },
+        {
+          "type": "address",
+          "name": "_dataStore"
+        },
+        {
+          "type": "address",
+          "name": "_eventEmitter"
+        }
+      ]
+    },
+    {
+      "type": "error",
+      "name": "EmptyToken",
+      "inputs": []
+    },
+    {
+      "type": "error",
+      "name": "InvalidBaseKey",
+      "inputs": [
+        {
+          "type": "bytes32",
+          "name": "baseKey"
+        }
+      ]
+    },
+    {
+      "type": "error",
+      "name": "InvalidOracleProvider",
+      "inputs": [
+        {
+          "type": "address",
+          "name": "provider"
+        }
+      ]
+    },
+    {
+      "type": "error",
+      "name": "OracleProviderAlreadyExistsForToken",
+      "inputs": [
+        {
+          "type": "address",
+          "name": "oracle"
+        },
+        {
+          "type": "address",
+          "name": "token"
+        }
+      ]
+    },
+    {
+      "type": "error",
+      "name": "OracleProviderMinChangeDelayNotYetPassed",
+      "inputs": [
+        {
+          "type": "address",
+          "name": "token"
+        },
+        {
+          "type": "address",
+          "name": "provider"
+        }
+      ]
+    },
+    {
+      "type": "error",
+      "name": "Unauthorized",
+      "inputs": [
+        {
+          "type": "address",
+          "name": "msgSender"
+        },
+        {
+          "type": "string",
+          "name": "role"
+        }
+      ]
+    },
+    {
+      "type": "function",
+      "name": "allowedBaseKeys",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [
+        {
+          "type": "bytes32"
+        }
+      ],
+      "outputs": [
+        {
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "type": "function",
+      "name": "allowedLimitedBaseKeys",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [
+        {
+          "type": "bytes32"
+        }
+      ],
+      "outputs": [
+        {
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "type": "function",
+      "name": "dataStore",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [],
+      "outputs": [
+        {
+          "type": "address"
+        }
+      ]
+    },
+    {
+      "type": "function",
+      "name": "eventEmitter",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [],
+      "outputs": [
+        {
+          "type": "address"
+        }
+      ]
+    },
+    {
+      "type": "function",
+      "name": "initOracleConfig",
+      "constant": false,
+      "payable": false,
+      "inputs": [
+        {
+          "type": "tuple",
+          "name": "params",
+          "components": [
+            {
+              "type": "address",
+              "name": "token"
+            },
+            {
+              "type": "tuple",
+              "name": "priceFeed",
+              "components": [
+                {
+                  "type": "address",
+                  "name": "feedAddress"
+                },
+                {
+                  "type": "uint256",
+                  "name": "multiplier"
+                },
+                {
+                  "type": "uint256",
+                  "name": "heartbeatDuration"
+                },
+                {
+                  "type": "uint256",
+                  "name": "stablePrice"
+                }
+              ]
+            },
+            {
+              "type": "tuple",
+              "name": "dataStream",
+              "components": [
+                {
+                  "type": "bytes32",
+                  "name": "feedId"
+                },
+                {
+                  "type": "uint256",
+                  "name": "multiplier"
+                },
+                {
+                  "type": "uint256",
+                  "name": "spreadReductionFactor"
+                }
+              ]
+            },
+            {
+              "type": "tuple",
+              "name": "edge",
+              "components": [
+                {
+                  "type": "bytes32",
+                  "name": "feedId"
+                },
+                {
+                  "type": "uint256",
+                  "name": "tokenDecimals"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "initOracleProviderForToken",
+      "constant": false,
+      "payable": false,
+      "inputs": [
+        {
+          "type": "address",
+          "name": "oracle"
+        },
+        {
+          "type": "address",
+          "name": "token"
+        },
+        {
+          "type": "address",
+          "name": "provider"
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "multicall",
+      "constant": false,
+      "payable": false,
+      "inputs": [
+        {
+          "type": "bytes[]",
+          "name": "data"
+        }
+      ],
+      "outputs": [
+        {
+          "type": "bytes[]",
+          "name": "results"
+        }
+      ]
+    },
+    {
+      "type": "function",
+      "name": "roleStore",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [],
+      "outputs": [
+        {
+          "type": "address"
+        }
+      ]
+    },
+    {
+      "type": "function",
+      "name": "setAddress",
+      "constant": false,
+      "payable": false,
+      "inputs": [
+        {
+          "type": "bytes32",
+          "name": "baseKey"
+        },
+        {
+          "type": "bytes",
+          "name": "data"
+        },
+        {
+          "type": "address",
+          "name": "value"
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "setBool",
+      "constant": false,
+      "payable": false,
+      "inputs": [
+        {
+          "type": "bytes32",
+          "name": "baseKey"
+        },
+        {
+          "type": "bytes",
+          "name": "data"
+        },
+        {
+          "type": "bool",
+          "name": "value"
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "setBytes32",
+      "constant": false,
+      "payable": false,
+      "inputs": [
+        {
+          "type": "bytes32",
+          "name": "baseKey"
+        },
+        {
+          "type": "bytes",
+          "name": "data"
+        },
+        {
+          "type": "bytes32",
+          "name": "value"
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "setClaimableCollateralFactorForAccount",
+      "constant": false,
+      "payable": false,
+      "inputs": [
+        {
+          "type": "address",
+          "name": "market"
+        },
+        {
+          "type": "address",
+          "name": "token"
+        },
+        {
+          "type": "uint256",
+          "name": "timeKey"
+        },
+        {
+          "type": "address",
+          "name": "account"
+        },
+        {
+          "type": "uint256",
+          "name": "factor"
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "setClaimableCollateralFactorForTime",
+      "constant": false,
+      "payable": false,
+      "inputs": [
+        {
+          "type": "address",
+          "name": "market"
+        },
+        {
+          "type": "address",
+          "name": "token"
+        },
+        {
+          "type": "uint256",
+          "name": "timeKey"
+        },
+        {
+          "type": "uint256",
+          "name": "factor"
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "setClaimableCollateralReductionFactorForAccount",
+      "constant": false,
+      "payable": false,
+      "inputs": [
+        {
+          "type": "address",
+          "name": "market"
+        },
+        {
+          "type": "address",
+          "name": "token"
+        },
+        {
+          "type": "uint256",
+          "name": "timeKey"
+        },
+        {
+          "type": "address",
+          "name": "account"
+        },
+        {
+          "type": "uint256",
+          "name": "factor"
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "setInt",
+      "constant": false,
+      "payable": false,
+      "inputs": [
+        {
+          "type": "bytes32",
+          "name": "baseKey"
+        },
+        {
+          "type": "bytes",
+          "name": "data"
+        },
+        {
+          "type": "int256",
+          "name": "value"
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "setOracleProviderForFeeHandlerToken",
+      "constant": false,
+      "payable": false,
+      "inputs": [
+        {
+          "type": "address",
+          "name": "token"
+        },
+        {
+          "type": "address",
+          "name": "provider"
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "setOracleProviderForToken",
+      "constant": false,
+      "payable": false,
+      "inputs": [
+        {
+          "type": "address",
+          "name": "oracle"
+        },
+        {
+          "type": "address",
+          "name": "token"
+        },
+        {
+          "type": "address",
+          "name": "provider"
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "setPositionImpactDistributionRate",
+      "constant": false,
+      "payable": false,
+      "inputs": [
+        {
+          "type": "address",
+          "name": "market"
+        },
+        {
+          "type": "uint256",
+          "name": "minPositionImpactPoolAmount"
+        },
+        {
+          "type": "uint256",
+          "name": "positionImpactPoolDistributionRate"
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "setUint",
+      "constant": false,
+      "payable": false,
+      "inputs": [
+        {
+          "type": "bytes32",
+          "name": "baseKey"
+        },
+        {
+          "type": "bytes",
+          "name": "data"
+        },
+        {
+          "type": "uint256",
+          "name": "value"
+        }
+      ],
+      "outputs": []
+    }
+  ],
+  "transactionHash": "0x159b3c45d1537d1e686292a86b75e6277b6b9e143b2696ada72558e28bb152cb",
+  "receipt": {
+    "to": "0xF01c7D728EE24d76B866127Bb80e189fb26aB367",
+    "from": "0x55A7CCeC5b602490e3fE8944c26843f4434A1c73",
+    "transactionIndex": 1,
+    "blockHash": "0x0c5825c4b9b6786965efd4e2347d4bdc98caab469cfd79726df1ab4b25a210f8",
+    "blockNumber": 31613965
+  },
+  "numDeployments": 1
+}
