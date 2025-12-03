@@ -1,6 +1,14 @@
 # GMX Synthetics Documentation
 
-This directory contains automatically generated deployment documentation for GMX Synthetics contracts across all supported networks.
+This directory contains documentation for GMX Synthetics contracts.
+
+## Developer Resources
+
+- **[Developer Guide](./DEVELOPER_GUIDE.md)** - Comprehensive developer-friendly summary covering system architecture, core mechanisms, integration patterns, and security considerations
+
+## Deployment Documentation
+
+This directory also contains automatically generated deployment documentation for GMX Synthetics contracts across all supported networks.
 
 ## Automatic Updates
 
