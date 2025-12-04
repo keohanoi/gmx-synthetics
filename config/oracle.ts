@@ -113,7 +113,7 @@ export default async function (hre: HardhatRuntimeEnvironment): Promise<OracleCo
       minOracleSigners: 1,
       // Note: Chainlink Data Streams may not be available on Mantle Sepolia testnet
       // dataStreamFeedVerifier: "0x...", // TODO: Add if available
-      // chainlinkPaymentToken: "0x...", // TODO: Add if available
+      chainlinkPaymentToken: "0xdEAddEaDdeadDEadDEADDEAddEADDEAddead1111", // WETH as payment token
       edgeOracleSigner: "0x1C498E2FE362e489A5Aac71690f9121914e0d55e",
     },
 

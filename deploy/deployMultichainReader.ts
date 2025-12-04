@@ -28,4 +28,8 @@ const func = createDeployFunction({
 
 func.dependencies = func.dependencies.concat(["MockEndpointV2"]);
 
+func.skip = async (hre) => {
+  return hre.network.name === "mantleSepolia";
+};
+
 export default func;

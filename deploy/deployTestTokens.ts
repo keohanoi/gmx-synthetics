@@ -54,6 +54,11 @@ const func = async ({ getNamedAccounts, deployments, gmx, network }: HardhatRunt
       continue;
     }
 
+    if (!token.transferGasLimit) {
+      console.warn(`WARN: ${tokenSymbol} does not have transferGasLimit defined`);
+      continue;
+    }
+
     await setUintIfDifferent(
       keys.tokenTransferGasLimit(token.address!),
       token.transferGasLimit,

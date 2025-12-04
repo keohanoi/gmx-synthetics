@@ -1782,26 +1782,67 @@ const config: {
       decimals: 18,
       transferGasLimit: 200 * 1000,
       deploy: true,
+      priceFeed: {
+        decimals: 8,
+        heartbeatDuration: 24 * 60 * 60,
+        deploy: true,
+        initPrice: "500000000000",
+      },
     },
     GMX: {
       decimals: 18,
       transferGasLimit: 200 * 1000,
       deploy: true,
+      priceFeed: {
+        decimals: 8,
+        heartbeatDuration: 24 * 60 * 60,
+        deploy: true,
+        initPrice: "10000000000",
+      },
+    },
+    ESGMX: {
+      decimals: 18,
+      transferGasLimit: 200 * 1000,
+      deploy: true,
+      priceFeed: {
+        decimals: 8,
+        heartbeatDuration: 24 * 60 * 60,
+        deploy: true,
+        initPrice: "10000000000",
+      },
     },
     WBTC: {
       decimals: 8,
       transferGasLimit: 200 * 1000,
       deploy: true,
+      priceFeed: {
+        decimals: 8,
+        heartbeatDuration: 24 * 60 * 60,
+        deploy: true,
+        initPrice: "9700000000000",
+      },
     },
     USDC: {
       decimals: 6,
       transferGasLimit: 200 * 1000,
       deploy: true,
+      priceFeed: {
+        decimals: 8,
+        heartbeatDuration: 24 * 60 * 60,
+        deploy: true,
+        initPrice: "100000000",
+      },
     },
     USDT: {
       decimals: 6,
       transferGasLimit: 200 * 1000,
       deploy: true,
+      priceFeed: {
+        decimals: 8,
+        heartbeatDuration: 24 * 60 * 60,
+        deploy: true,
+        initPrice: "100000000",
+      },
     },
     SOL: {
       synthetic: true,
@@ -1881,7 +1922,8 @@ function getTokens(hre: HardhatRuntimeEnvironment) {
     if (token.address) {
       (token as any).address = ethers.utils.getAddress(token.address);
     }
-    if (!hre.network.live) {
+    // Only deploy tokens that don't have addresses and aren't synthetic on test networks
+    if (!hre.network.live && !token.address && !token.synthetic) {
       (token as any).deploy = true;
     }
 

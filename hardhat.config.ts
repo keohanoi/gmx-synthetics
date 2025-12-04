@@ -55,7 +55,7 @@ const getRpcUrl = (network) => {
     snowtrace: "https://api.avax.network/ext/bc/C/rpc",
     arbitrumBlockscout: "https://arb1.arbitrum.io/rpc",
     mantle: "https://rpc.mantle.xyz",
-    mantleSepolia: "https://rpc.sepolia.mantle.xyz",
+    mantleSepolia: "https://rpc.testnet.mantle.xyz/",
   };
 
   let rpc = defaultRpcs[network];
@@ -202,10 +202,10 @@ const config: HardhatUserConfig = {
     hardhat: {
       saveDeployments: true,
       allowUnlimitedContractSize: true,
-      // forking: {
-      //   url: getRpcUrl("arbitrum"),
-      //   blockNumber: 370370866,
-      // },
+      forking: {
+        url: getRpcUrl("mantleSepolia"),
+        blockNumber: 31578449,
+      },
     },
     anvil: {
       url: "http://127.0.0.1:8545",
@@ -362,7 +362,7 @@ const config: HardhatUserConfig = {
           apiKey: process.env.MANTLE_SCAN_API_KEY || "",
         },
       },
-      blockGasLimit: 30_000_000,
+      blockGasLimit: 200_000_000_000, // Mantle Sepolia actual block gas limit
       gasPrice: "auto",
     },
   },

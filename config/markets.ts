@@ -4600,9 +4600,9 @@ const config: {
 
       atomicSwapFeeFactor: percentageToFloat("2.25%"),
 
-      maxLendableImpactFactor: exponentToFloat("2e-3"), // 0.002
-      maxLendableImpactFactorForWithdrawals: exponentToFloat("2e-3"), // 0.002
-      maxLendableImpactUsd: decimalToFloat(25), // $25
+      // maxLendableImpactFactor: exponentToFloat("2e-3"), // 0.002
+      // maxLendableImpactFactorForWithdrawals: exponentToFloat("2e-3"), // 0.002
+      // maxLendableImpactUsd: decimalToFloat(25), // $25
     },
     {
       tokens: { indexToken: "BTC", longToken: "BTC", shortToken: "USDC" },
@@ -4672,9 +4672,9 @@ const config: {
 
       atomicSwapFeeFactor: percentageToFloat("2.25%"),
 
-      maxLendableImpactFactor: exponentToFloat("2e-3"), // 0.002
-      maxLendableImpactFactorForWithdrawals: exponentToFloat("2e-3"), // 0.002
-      maxLendableImpactUsd: decimalToFloat(25), // $25
+      // maxLendableImpactFactor: exponentToFloat("2e-3"), // 0.002
+      // maxLendableImpactFactorForWithdrawals: exponentToFloat("2e-3"), // 0.002
+      // maxLendableImpactUsd: decimalToFloat(25), // $25
     },
   ],
   arbitrumGoerli: [
