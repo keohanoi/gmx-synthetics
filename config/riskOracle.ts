@@ -16,6 +16,7 @@ export type RiskOracleConfig = {
 };
 
 export default async function (hre: HardhatRuntimeEnvironment): Promise<RiskOracleConfig> {
+  const { deployments } = hre;
   const config: { [network: string]: RiskOracleConfig } = {
     localhost: {
       markets: {
@@ -65,7 +66,19 @@ export default async function (hre: HardhatRuntimeEnvironment): Promise<RiskOrac
     arbitrumSepolia: {
       riskOracle: "0x48b67764dBB6B8fc2A0c3987ed3819e543212Bc3",
     },
+
+    mantleSepolia: {},
   };
+
+  // For mantleSepolia, use the deployed MockRiskOracle
+  if (hre.network.name === "mantleSepolia") {
+    try {
+      const mockRiskOracle = await deployments.get("MockRiskOracle");
+      config.mantleSepolia.riskOracle = mockRiskOracle.address;
+    } catch (e) {
+      // MockRiskOracle will be deployed, we'll use it
+    }
+  }
 
   const riskOracleConfig: RiskOracleConfig = config[hre.network.name];
 

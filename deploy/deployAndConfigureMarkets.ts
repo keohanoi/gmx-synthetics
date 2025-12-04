@@ -7,7 +7,7 @@ import { updateMarketConfig } from "../scripts/updateMarketConfigUtils";
 const func = async ({ deployments, getNamedAccounts, gmx }: HardhatRuntimeEnvironment) => {
   const { execute, get, read, log } = deployments;
 
-  if (process.env.SKIP_NEW_MARKETS) {
+  if (process.env.SKIP_NEW_MARKETS === "true") {
     log("WARN: new markets will be skipped");
   }
 
@@ -30,7 +30,7 @@ const func = async ({ deployments, getNamedAccounts, gmx }: HardhatRuntimeEnviro
       continue;
     }
 
-    if (process.env.SKIP_NEW_MARKETS) {
+    if (process.env.SKIP_NEW_MARKETS === "true") {
       log("WARN: new market %s:%s:%s skipped", indexToken, longToken, shortToken);
       continue;
     }

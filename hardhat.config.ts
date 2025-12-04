@@ -54,6 +54,8 @@ const getRpcUrl = (network) => {
     baseSepolia: "https://sepolia.base.org",
     snowtrace: "https://api.avax.network/ext/bc/C/rpc",
     arbitrumBlockscout: "https://arb1.arbitrum.io/rpc",
+    mantle: "https://rpc.mantle.xyz",
+    mantleSepolia: "https://rpc.testnet.mantle.xyz/",
   };
 
   let rpc = defaultRpcs[network];
@@ -82,6 +84,8 @@ export const getExplorerUrl = (network) => {
     sepolia: "https://api.etherscan.io/v2/api?chainid=11155111",
     avalancheFuji: "https://api-testnet.snowtrace.io/",
     arbitrumBlockscout: "https://arbitrum.blockscout.com/api",
+    mantle: "https://api.mantlescan.xyz/api",
+    mantleSepolia: "https://api-sepolia.mantlescan.xyz/api",
   };
 
   const url = urls[network];
@@ -100,6 +104,8 @@ export const getBlockExplorerUrl = (network) => {
     arbitrumSepolia: "https://sepolia.arbiscan.io",
     baseSepolia: "https://sepolia.basescan.io",
     avalancheFuji: "https://testnet.snowtrace.io",
+    mantle: "https://explorer.mantle.xyz",
+    mantleSepolia: "https://explorer.sepolia.mantle.xyz",
   };
 
   const url = urls[network];
@@ -117,6 +123,10 @@ const getEtherscanApiKey = () => {
     return process.env.ARBISCAN_API_KEY;
   }
 
+  if (["mantle", "mantleSepolia"].includes(HARDHAT_NETWORK)) {
+    return process.env.MANTLE_SCAN_API_KEY || "";
+  }
+
   return {
     // hardhat-verify plugin uses "avalancheFujiTestnet" name
     arbitrumOne: process.env.ARBISCAN_API_KEY,
@@ -129,6 +139,8 @@ const getEtherscanApiKey = () => {
     snowtrace: "snowtrace", // apiKey is not required, just set a placeholder
     arbitrumBlockscout: "arbitrumBlockscout",
     botanix: process.env.BOTANIX_SCAN_API_KEY,
+    mantle: process.env.MANTLE_SCAN_API_KEY || "",
+    mantleSepolia: process.env.MANTLE_SCAN_API_KEY || "",
   };
 };
 
@@ -190,10 +202,10 @@ const config: HardhatUserConfig = {
     hardhat: {
       saveDeployments: true,
       allowUnlimitedContractSize: true,
-      // forking: {
-      //   url: getRpcUrl("arbitrum"),
-      //   blockNumber: 370370866,
-      // },
+      forking: {
+        url: getRpcUrl("mantleSepolia"),
+        blockNumber: 31578449,
+      },
     },
     anvil: {
       url: "http://127.0.0.1:8545",
@@ -327,6 +339,32 @@ const config: HardhatUserConfig = {
       blockGasLimit: 2500000,
       // gasPrice: 50000000000,
     },
+    mantle: {
+      url: getRpcUrl("mantle"),
+      chainId: 5000,
+      accounts: getEnvAccounts(),
+      verify: {
+        etherscan: {
+          apiUrl: getExplorerUrl("mantle"),
+          apiKey: process.env.MANTLE_SCAN_API_KEY || "",
+        },
+      },
+      blockGasLimit: 30_000_000,
+      gasPrice: "auto",
+    },
+    mantleSepolia: {
+      url: getRpcUrl("mantleSepolia"),
+      chainId: 5003,
+      accounts: getEnvAccounts(),
+      verify: {
+        etherscan: {
+          apiUrl: getExplorerUrl("mantleSepolia"),
+          apiKey: process.env.MANTLE_SCAN_API_KEY || "",
+        },
+      },
+      blockGasLimit: 200_000_000_000, // Mantle Sepolia actual block gas limit
+      gasPrice: "auto",
+    },
   },
   // hardhat-deploy has issues with some contracts
   // https://github.com/wighawag/hardhat-deploy/issues/264
@@ -363,6 +401,22 @@ const config: HardhatUserConfig = {
         urls: {
           apiURL: "https://api.routescan.io/v2/network/mainnet/evm/43114/etherscan/api",
           browserURL: "https://snowtrace.io",
+        },
+      },
+      {
+        network: "mantle",
+        chainId: 5000,
+        urls: {
+          apiURL: "https://api.mantlescan.xyz/api",
+          browserURL: "https://explorer.mantle.xyz",
+        },
+      },
+      {
+        network: "mantleSepolia",
+        chainId: 5003,
+        urls: {
+          apiURL: "https://api-sepolia.mantlescan.xyz/api",
+          browserURL: "https://explorer.sepolia.mantle.xyz",
         },
       },
       // {

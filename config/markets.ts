@@ -4565,6 +4565,118 @@ const config: {
       atomicSwapFeeFactor: percentageToFloat("0.75%"),
     },
   ],
+  mantleSepolia: [
+    {
+      tokens: { indexToken: "WETH", longToken: "WETH", shortToken: "USDC" },
+      virtualTokenIdForIndexToken: hashString("PERP:ETH/USD"),
+      virtualMarketId: hashString("SPOT:ETH/USD"),
+
+      ...baseMarketConfig,
+      ...fundingRateConfig_Low,
+      ...borrowingRateConfig_LowMax_WithLowerBase,
+
+      reserveFactor: percentageToFloat("275%"),
+      openInterestReserveFactor: percentageToFloat("270%"),
+
+      maxLongTokenPoolAmount: expandDecimals(100, 18), // 100 WETH
+      maxShortTokenPoolAmount: expandDecimals(300_000, 6), // $300k USDC
+
+      maxPoolUsdForDeposit: decimalToFloat(10_000_000), // $10M
+
+      negativePositionImpactFactor: exponentToFloat("5e-7"), // 0.0000005
+      positivePositionImpactFactor: exponentToFloat("4.5e-7"), // 0.00000045
+
+      minPositionImpactPoolAmount: expandDecimals(5, 18), // 5 ETH
+
+      negativeSwapImpactFactor: exponentToFloat("3e-10"),
+      positiveSwapImpactFactor: exponentToFloat("2e-10"),
+
+      minCollateralFactor: percentageToFloat("0.5%"), // 200x leverage
+      minCollateralFactorForLiquidation: percentageToFloat("0.25%"), // 200x leverage
+
+      minCollateralFactorForOpenInterestMultiplier: exponentToFloat("6e-11"),
+
+      maxOpenInterest: decimalToFloat(10_000_000), // $10M conservative for testnet
+
+      atomicSwapFeeFactor: percentageToFloat("2.25%"),
+
+      // maxLendableImpactFactor: exponentToFloat("2e-3"), // 0.002
+      // maxLendableImpactFactorForWithdrawals: exponentToFloat("2e-3"), // 0.002
+      // maxLendableImpactUsd: decimalToFloat(25), // $25
+    },
+    {
+      tokens: { indexToken: "BTC", longToken: "BTC", shortToken: "USDC" },
+      virtualTokenIdForIndexToken: hashString("PERP:BTC/USD"),
+      virtualMarketId: hashString("SPOT:BTC/USD"),
+
+      ...baseMarketConfig,
+      ...fundingRateConfig_Low,
+      ...borrowingRateConfig_LowMax_WithLowerBase,
+
+      reserveFactor: percentageToFloat("245%"),
+      openInterestReserveFactor: percentageToFloat("240%"),
+
+      maxLongTokenPoolAmount: expandDecimals(50, 8), // 50 BTC
+      maxShortTokenPoolAmount: expandDecimals(250_000, 6), // $250k USDC
+
+      maxPoolUsdForDeposit: decimalToFloat(7_500_000), // $7.5M
+
+      negativePositionImpactFactor: exponentToFloat("9e-11"),
+      positivePositionImpactFactor: exponentToFloat("3e-11"),
+
+      minPositionImpactPoolAmount: expandDecimals(50, 6), // 0.5 BTC
+
+      negativeSwapImpactFactor: exponentToFloat("4e-10"),
+      positiveSwapImpactFactor: exponentToFloat("2e-10"),
+
+      minCollateralFactor: percentageToFloat("0.5%"), // 200x leverage
+      minCollateralFactorForLiquidation: percentageToFloat("0.5%"), // 200x leverage
+
+      minCollateralFactorForOpenInterestMultiplier: exponentToFloat("6e-11"),
+
+      maxOpenInterest: decimalToFloat(5_000_000), // $5M conservative for testnet
+
+      atomicSwapFeeFactor: percentageToFloat("0.75%"),
+    },
+    {
+      tokens: { indexToken: "WETH", longToken: "wstETH", shortToken: "USDC" },
+      virtualTokenIdForIndexToken: hashString("PERP:ETH/USD"),
+      virtualMarketId: hashString("SPOT:wstETH/USD"),
+
+      ...baseMarketConfig,
+      ...fundingRateConfig_Low,
+      ...borrowingRateConfig_LowMax_WithLowerBase,
+
+      reserveFactor: percentageToFloat("275%"),
+      openInterestReserveFactor: percentageToFloat("270%"),
+
+      maxLongTokenPoolAmount: expandDecimals(50, 18), // 50 wstETH
+      maxShortTokenPoolAmount: expandDecimals(200_000, 6), // $200k USDC
+
+      maxPoolUsdForDeposit: decimalToFloat(5_000_000), // $5M
+
+      negativePositionImpactFactor: exponentToFloat("5e-7"), // 0.0000005
+      positivePositionImpactFactor: exponentToFloat("4.5e-7"), // 0.00000045
+
+      minPositionImpactPoolAmount: expandDecimals(3, 18), // 3 wstETH
+
+      negativeSwapImpactFactor: exponentToFloat("3e-10"),
+      positiveSwapImpactFactor: exponentToFloat("2e-10"),
+
+      minCollateralFactor: percentageToFloat("0.5%"), // 200x leverage
+      minCollateralFactorForLiquidation: percentageToFloat("0.25%"), // 200x leverage
+
+      minCollateralFactorForOpenInterestMultiplier: exponentToFloat("6e-11"),
+
+      maxOpenInterest: decimalToFloat(5_000_000), // $5M conservative for testnet
+
+      atomicSwapFeeFactor: percentageToFloat("2.25%"),
+
+      // maxLendableImpactFactor: exponentToFloat("2e-3"), // 0.002
+      // maxLendableImpactFactorForWithdrawals: exponentToFloat("2e-3"), // 0.002
+      // maxLendableImpactUsd: decimalToFloat(25), // $25
+    },
+  ],
   arbitrumGoerli: [
     {
       tokens: { indexToken: "WETH", longToken: "WETH", shortToken: "USDC" },

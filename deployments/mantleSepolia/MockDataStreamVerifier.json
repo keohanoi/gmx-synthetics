@@ -1,0 +1,80 @@
+{
+  "address": "0x1554fAc0d5eeE4bC649084F4ba260d4DE756449E",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "bytes",
+          "name": "payload",
+          "type": "bytes"
+        },
+        {
+          "internalType": "bytes",
+          "name": "parameterPayload",
+          "type": "bytes"
+        }
+      ],
+      "name": "verify",
+      "outputs": [
+        {
+          "internalType": "bytes",
+          "name": "",
+          "type": "bytes"
+        }
+      ],
+      "stateMutability": "payable",
+      "type": "function"
+    }
+  ],
+  "transactionHash": "0x64bab11e49c80c07bd228a7071a30d5d94216ce8e4e17726a4128eef3a45fe64",
+  "receipt": {
+    "to": null,
+    "from": "0x55A7CCeC5b602490e3fE8944c26843f4434A1c73",
+    "contractAddress": "0x1554fAc0d5eeE4bC649084F4ba260d4DE756449E",
+    "transactionIndex": 1,
+    "gasUsed": "543103053",
+    "logsBloom": "0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+    "blockHash": "0xbd9b7e27733326ae134a2a45ddc858dbdfad31e59f1b129894fcc09868639975",
+    "transactionHash": "0x64bab11e49c80c07bd228a7071a30d5d94216ce8e4e17726a4128eef3a45fe64",
+    "logs": [],
+    "blockNumber": 31615564,
+    "cumulativeGasUsed": "543158294",
+    "status": 1,
+    "byzantium": true
+  },
+  "args": [],
+  "numDeployments": 1,
+  "solcInputHash": "e289d6893afb051fa46f0dd80ced5fe3",
+  "metadata": "{\"compiler\":{\"version\":\"0.8.29+commit.ab55807c\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"payload\",\"type\":\"bytes\"},{\"internalType\":\"bytes\",\"name\":\"parameterPayload\",\"type\":\"bytes\"}],\"name\":\"verify\",\"outputs\":[{\"internalType\":\"bytes\",\"name\":\"\",\"type\":\"bytes\"}],\"stateMutability\":\"payable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{\"verify(bytes,bytes)\":{\"params\":{\"parameterPayload\":\"fee metadata for billing. For the current implementation this is just the abi-encoded fee token ERC-20 address\",\"payload\":\"The encoded data to be verified, including the signed report.\"},\"returns\":{\"_0\":\"The encoded report from the verifier.\"}}},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{\"verify(bytes,bytes)\":{\"notice\":\"Verifies that the data encoded has been signed correctly by routing to the correct verifier, and bills the user if applicable.\"}},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/mock/MockDataStreamVerifier.sol\":\"MockDataStreamVerifier\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\",\"useLiteralContent\":true},\"optimizer\":{\"enabled\":true,\"runs\":10},\"remappings\":[]},\"sources\":{\"contracts/mock/MockDataStreamVerifier.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n\\npragma solidity ^0.8.0;\\n\\nimport \\\"../oracle/IChainlinkDataStreamVerifier.sol\\\";\\n\\ncontract MockDataStreamVerifier is IChainlinkDataStreamVerifier {\\n    function verify(\\n        bytes calldata payload,\\n        bytes calldata parameterPayload\\n    ) external payable returns (bytes memory) {\\n        (address feeToken) = abi.decode(parameterPayload, (address));\\n        require(feeToken == 0x99bbA657f2BbC93c02D617f8bA121cB8Fc104Acf, \\\"invalid fee token\\\");\\n\\n        return payload;\\n    }\\n}\\n\",\"keccak256\":\"0x90fcafc08057b1e9a3cf18291817bdea43e9d5a40031bb25fd62dd166d2e8eff\",\"license\":\"MIT\"},\"contracts/oracle/IChainlinkDataStreamVerifier.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n\\npragma solidity ^0.8.0;\\n\\ninterface IChainlinkDataStreamVerifier {\\n    /**\\n    * @notice Verifies that the data encoded has been signed\\n    * correctly by routing to the correct verifier, and bills the user if applicable.\\n    * @param payload The encoded data to be verified, including the signed\\n    * report.\\n    * @param parameterPayload fee metadata for billing. For the current implementation this is just the abi-encoded fee token ERC-20 address\\n    * @return verifierResponse The encoded report from the verifier.\\n    */\\n    function verify(\\n        bytes calldata payload,\\n        bytes calldata parameterPayload\\n    ) external payable returns (bytes memory verifierResponse);\\n}\\n\",\"keccak256\":\"0x853f70d4a93a92a745cc5a8de10e6d669ef640bf1918aa866223552f4d4f2f4b\",\"license\":\"MIT\"}},\"version\":1}",
+  "bytecode": "0x6080604052348015600f57600080fd5b5061026e8061001f6000396000f3fe60806040526004361061001e5760003560e01c8063f7e83aee14610023575b600080fd5b61003661003136600461014b565b61004c565b60405161004391906101ba565b60405180910390f35b6060600061005c83850185610208565b90507399bba657f2bbc93c02d617f8ba121cb8fc104acf6001600160a01b038216146100c25760405162461bcd60e51b815260206004820152601160248201527034b73b30b634b2103332b2903a37b5b2b760791b604482015260640160405180910390fd5b85858080601f016020809104026020016040519081016040528093929190818152602001838380828437600092019190915250929998505050505050505050565b60008083601f84011261011557600080fd5b5081356001600160401b0381111561012c57600080fd5b60208301915083602082850101111561014457600080fd5b9250929050565b6000806000806040858703121561016157600080fd5b84356001600160401b0381111561017757600080fd5b61018387828801610103565b90955093505060208501356001600160401b038111156101a257600080fd5b6101ae87828801610103565b95989497509550505050565b602081526000825180602084015260005b818110156101e857602081860181015160408684010152016101cb565b506000604082850101526040601f19601f83011684010191505092915050565b60006020828403121561021a57600080fd5b81356001600160a01b038116811461023157600080fd5b939250505056fea264697066735822122035a95475342d6bcd5f7f2bae2339f96da08fc8da8acb06c58d85e1447ce9a14e64736f6c634300081d0033",
+  "deployedBytecode": "0x60806040526004361061001e5760003560e01c8063f7e83aee14610023575b600080fd5b61003661003136600461014b565b61004c565b60405161004391906101ba565b60405180910390f35b6060600061005c83850185610208565b90507399bba657f2bbc93c02d617f8ba121cb8fc104acf6001600160a01b038216146100c25760405162461bcd60e51b815260206004820152601160248201527034b73b30b634b2103332b2903a37b5b2b760791b604482015260640160405180910390fd5b85858080601f016020809104026020016040519081016040528093929190818152602001838380828437600092019190915250929998505050505050505050565b60008083601f84011261011557600080fd5b5081356001600160401b0381111561012c57600080fd5b60208301915083602082850101111561014457600080fd5b9250929050565b6000806000806040858703121561016157600080fd5b84356001600160401b0381111561017757600080fd5b61018387828801610103565b90955093505060208501356001600160401b038111156101a257600080fd5b6101ae87828801610103565b95989497509550505050565b602081526000825180602084015260005b818110156101e857602081860181015160408684010152016101cb565b506000604082850101526040601f19601f83011684010191505092915050565b60006020828403121561021a57600080fd5b81356001600160a01b038116811461023157600080fd5b939250505056fea264697066735822122035a95475342d6bcd5f7f2bae2339f96da08fc8da8acb06c58d85e1447ce9a14e64736f6c634300081d0033",
+  "libraries": {},
+  "devdoc": {
+    "kind": "dev",
+    "methods": {
+      "verify(bytes,bytes)": {
+        "params": {
+          "parameterPayload": "fee metadata for billing. For the current implementation this is just the abi-encoded fee token ERC-20 address",
+          "payload": "The encoded data to be verified, including the signed report."
+        },
+        "returns": {
+          "_0": "The encoded report from the verifier."
+        }
+      }
+    },
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {
+      "verify(bytes,bytes)": {
+        "notice": "Verifies that the data encoded has been signed correctly by routing to the correct verifier, and bills the user if applicable."
+      }
+    },
+    "version": 1
+  },
+  "storageLayout": {
+    "storage": [],
+    "types": null
+  }
+}

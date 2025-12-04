@@ -276,6 +276,16 @@ export default async function ({ network }: HardhatRuntimeEnvironment) {
     botanix: {
       positionFeeReceiverFactor: decimalToFloat(50, 2), // 50%
     },
+    mantleSepolia: {
+      maxAutoCancelOrders: 11,
+      maxTotalCallbackGasLimitForAutoCancelOrders: 10_000_000,
+      claimableCollateralDelay: 24 * 60 * 60,
+      // Multichain configuration can be added later if needed for cross-chain testing
+      multichainProviders: {},
+      multichainEndpoints: {},
+      srcChainIds: {},
+      eids: {},
+    },
   }[network.name];
 
   if (!networkConfig) {

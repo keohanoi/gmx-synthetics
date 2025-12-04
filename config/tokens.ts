@@ -1782,30 +1782,131 @@ const config: {
       decimals: 18,
       transferGasLimit: 200 * 1000,
       deploy: true,
+      priceFeed: {
+        decimals: 8,
+        heartbeatDuration: 24 * 60 * 60,
+        deploy: true,
+        initPrice: "500000000000",
+      },
     },
     GMX: {
       decimals: 18,
       transferGasLimit: 200 * 1000,
       deploy: true,
+      priceFeed: {
+        decimals: 8,
+        heartbeatDuration: 24 * 60 * 60,
+        deploy: true,
+        initPrice: "10000000000",
+      },
+    },
+    ESGMX: {
+      decimals: 18,
+      transferGasLimit: 200 * 1000,
+      deploy: true,
+      priceFeed: {
+        decimals: 8,
+        heartbeatDuration: 24 * 60 * 60,
+        deploy: true,
+        initPrice: "10000000000",
+      },
     },
     WBTC: {
       decimals: 8,
       transferGasLimit: 200 * 1000,
       deploy: true,
+      priceFeed: {
+        decimals: 8,
+        heartbeatDuration: 24 * 60 * 60,
+        deploy: true,
+        initPrice: "9700000000000",
+      },
     },
     USDC: {
       decimals: 6,
       transferGasLimit: 200 * 1000,
       deploy: true,
+      priceFeed: {
+        decimals: 8,
+        heartbeatDuration: 24 * 60 * 60,
+        deploy: true,
+        initPrice: "100000000",
+      },
     },
     USDT: {
       decimals: 6,
       transferGasLimit: 200 * 1000,
       deploy: true,
+      priceFeed: {
+        decimals: 8,
+        heartbeatDuration: 24 * 60 * 60,
+        deploy: true,
+        initPrice: "100000000",
+      },
     },
     SOL: {
       synthetic: true,
       decimals: 18,
+    },
+  },
+  mantleSepolia: {
+    // Official wrapped ETH from Mantle token list - acts as wrapped native on Mantle Sepolia
+    WETH: {
+      address: "0xdEAddEaDdeadDEadDEADDEAddEADDEAddead1111",
+      decimals: 18,
+      wrappedNative: true,
+      transferGasLimit: 200 * 1000,
+      dataStreamFeedId: "0x000359843a543ee2fe414dc14c7e7920ef10f4372990b79d6361cdc0dd1ba782",
+      dataStreamFeedDecimals: 18,
+      priceFeed: {
+        decimals: 8,
+        heartbeatDuration: 144 * 60 * 60,
+        deploy: true,
+        initPrice: "330000000000", // $3300 initial price for ETH
+      },
+    },
+    // Test USDC - not available on Mantle Sepolia, will be deployed
+    USDC: {
+      decimals: 6,
+      deploy: true,
+      transferGasLimit: 200 * 1000,
+      dataStreamFeedId: "0x00038f83323b6b08116d1614cf33a9bd71ab5e0abf0c9f1b783a74a43e7bd992",
+      dataStreamFeedDecimals: 18,
+      priceFeed: {
+        decimals: 8,
+        heartbeatDuration: 144 * 60 * 60,
+        deploy: true,
+        initPrice: "100000000", // $1.00
+        stablePriceUsd: decimalToFloat(1),
+      },
+    },
+    // Synthetic BTC for BTC/USD markets
+    BTC: {
+      synthetic: true,
+      decimals: 8,
+      transferGasLimit: 200 * 1000,
+      dataStreamFeedId: "0x00037da06d56d083fe599397a4769a042d63aa73dc4ef57709d31e9971a5b439",
+      dataStreamFeedDecimals: 18,
+      priceFeed: {
+        decimals: 8,
+        heartbeatDuration: 144 * 60 * 60,
+        deploy: true,
+        initPrice: "9700000000000", // $97000 initial price for BTC
+      },
+    },
+    // Official wstETH from Mantle token list - can be used for ETH liquid staking markets
+    wstETH: {
+      address: "0xa4c6370CcF0ec33B785B33E81341727e635aCcd0",
+      decimals: 18,
+      transferGasLimit: 200 * 1000,
+      dataStreamFeedId: "0x000359843a543ee2fe414dc14c7e7920ef10f4372990b79d6361cdc0dd1ba782", // Using ETH feed
+      dataStreamFeedDecimals: 18,
+      priceFeed: {
+        decimals: 8,
+        heartbeatDuration: 144 * 60 * 60,
+        deploy: true,
+        initPrice: "385000000000", // ~$3850 (slightly above ETH for staked ETH)
+      },
     },
   },
 };
@@ -1821,7 +1922,8 @@ function getTokens(hre: HardhatRuntimeEnvironment) {
     if (token.address) {
       (token as any).address = ethers.utils.getAddress(token.address);
     }
-    if (!hre.network.live) {
+    // Only deploy tokens that don't have addresses and aren't synthetic on test networks
+    if (!hre.network.live && !token.address && !token.synthetic) {
       (token as any).deploy = true;
     }
 
